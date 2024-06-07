@@ -1,0 +1,65 @@
+@{
+    ViewData["Title"] = "Análisis de Sentimientos";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #e9ecef;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>@ViewData["Title"]</h1>
+
+            <form asp-controller="ML" asp-action="Predict" method="post">
+                <div class="form-group">
+                    <label for="sentimiento">Escribe tu sentimiento:</label>
+                    <input type="text" class="form-control" id="sentimiento" name="sentimiento" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+            </form>
+        </div>
+
+        @if (ViewData["Sentimiento"] != null)
+        {
+            <div class="result-container">
+                <h2>Resultado de la Predicción</h2>
+                <p><strong>Sentimiento Predicho:</strong> @ViewData["Sentimiento"]</p>
+                <p><strong>Sentimiento Score:</strong> @ViewData["Score"]</p>
+            </div>
+        }
+    </div>
+        
+</body>
+</html>
